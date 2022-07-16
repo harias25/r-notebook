@@ -1,0 +1,189 @@
+Arithmetic with R
+
+```{r}
+5 + 5
+10-2
+3*5
+(5+5)/2
+28%%6
+```
+
+Variable Assigment
+
+```{r}
+x <- 10
+x
+
+y = 9
+
+x+y
+
+result <- x-y
+result
+```
+
+Basics data types in R
+```{r}
+my_numeric = 423
+
+my_character = "universe"
+
+my_logical = FALSE
+
+class(my_numeric)
+
+```
+
+Create Vector
+```{r}
+numeric_vector = c(1,10,49)
+numeric_vector
+
+character_vector <- c("a","b","c")
+boolean_vector = c(TRUE,FALSE,TRUE)
+
+character_vector
+boolean_vector
+
+poker_vector = c(140,-50,-20,-120,240)
+roulette_vector = c(-24,-50,10,350,10)
+
+poker_vector
+
+```
+
+Naming a Vector
+```{r}
+names(poker_vector) <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
+poker_vector
+
+days <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
+
+names(roulette_vector) = days
+roulette_vector
+
+```
+
+
+Selection by Comparision
+```{r}
+age = 17
+age >= 18
+
+selection_vector = poker_vector > 0
+selection_vector
+
+
+poker_winning_days <- poker_vector[selection_vector]
+poker_winning_days
+```
+
+Calculating
+```{r}
+c(1,2,3) + c(4,5,6)
+c(1+4, 2+5,3+6)
+
+a = c(1,2,3) 
+b = c(4,5,6)
+c = a + b
+c
+
+```
+
+Vector Selection
+```{r}
+poker_vector
+poker_vector[3]
+poker_vector[c(2,3,4)]
+poker_vector[2:5]
+
+```
+
+Matrices
+```{r}
+matrix(1:9, byrow=TRUE, nrow=3)
+```
+
+Analyze Matrices
+```{r}
+
+new_hole <- c(460.998, 314.4)
+empire_strikes = c(290.475, 247.900)
+return_jedi = c(309.306, 165.8)
+
+box_office = c(new_hole, empire_strikes, return_jedi)
+star_wars_matrix = matrix(box_office, byrow=TRUE, nrow=3)
+
+star_wars_matrix
+```
+
+Nombrados filas y columnas
+```{r}
+region = c("US","non_US")
+titles = c("A new hope", "The Empire Strikes back", "Return of the Jedi")
+colnames(star_wars_matrix) <- region
+rownames(star_wars_matrix) <-titles
+
+star_wars_matrix
+```
+
+
+
+Factors
+```{r}
+sex_vector <- c("Male", "Female", "Male", "Male")
+factor_sex_vector <- factor(sex_vector)
+factor_sex_vector
+
+```
+
+```{r}
+temperature_vector = c("High", "Low", "High", "Low", "Medium")
+factor_temperature_vector <- factor(temperature_vector, order=TRUE, levels=c("Low", "Medium", "High"))
+
+factor_temperature_vector
+
+```
+
+Factor Levels
+```{r}
+survey_vector = c("M", "F", "F", "M", "M")
+factor_survey_vector = factor(survey_vector)
+factor_survey_vector
+levels(factor_survey_vector) <- c("Female", "Male")
+
+
+```
+
+Summary
+
+```{r}
+summary(factor_survey_vector)
+
+```
+
+Ordered Factors
+```{r}
+male <- factor_survey_vector[1]
+female <- factor_survey_vector[2]
+
+male > female
+
+
+speed_vector <- c("medium", "slow", "slow", "medium", "fast")
+factor_speed_vector <-factor(speed_vector)
+factor_speed_vector
+
+factor_speed_vector <-factor(speed_vector, ordered = TRUE, levels = c("slow", "medium", "fast"))
+factor_speed_vector
+
+speed_1 <- factor_speed_vector[2]
+speed_1
+speed_5 = factor_speed_vector[5]
+speed_5
+
+speed_1 > speed_5
+speed_5 > speed_1
+
+```
+
