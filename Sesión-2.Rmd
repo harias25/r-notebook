@@ -98,8 +98,6 @@ shining_list[[2]]
 #Obteniendo Jack Nicholson
 shining_list[[2]][1]
 
-
-
 ```
 
 
