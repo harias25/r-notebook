@@ -1,0 +1,171 @@
+Carga Previa
+```{r}
+mov <- c("The Shining")
+act <- matrix(c("Jack Nicholson","Shelley Duvall","Danny Lloyd","Scatman Crothers","Barry Nelson"))
+
+scores <- c(4.5,5,4)
+sources <- c("IMDb1","IMDb2","IMDb3")
+comments <- c("Best Horror Film I Have Ever Seen","A truly brilliant and scary film from Stanley Kubrick","A masterpiece of psychological horror")
+rev <- data.frame(scores, sources, comments)
+
+shining_list = list(moviename = mov, actors=act, reviews=rev)
+shining_list
+```
+
+
+
+Equality
+```{r}
+"Rchitect" != "rchitect"
+TRUE == FALSE
+-6 * 14 != 17 - 101
+TRUE == 1
+
+-6 * 5 * 2 >= 10 +1 
+"rainign" <= "raining dogs"
+
+TRUE < FALSE
+```
+
+Compare Vectors
+```{r}
+linkedin <- c(16,9,13,5,2,17,14)
+facebook <- c(17,9,16,5,2,13,14)
+
+linkedin > 15 
+facebook <= 5
+
+linkedin > facebook
+
+```
+
+Compare Matrices
+```{r}
+views = matrix(c(linkedin, facebook), nrow= 2, byrow = TRUE)
+views
+
+views == 13
+views <= 14
+
+```
+
+& and 1
+
+```{r}
+linkedin
+
+#tail permite obtener una cantidad de elementos de la cola de esa coleccion
+last <- tail(linkedin, 1)
+last
+
+last > 5 | last < 10
+last > 5 & last < 20
+linkedin > 10 & facebook < 10
+linkedin >= 12 | facebook <= 12
+```
+
+The if statement
+```{r}
+medium <- "Facebook"
+num_views <- 14
+if(medium == "Linkedin"){
+  print("Showing Linkedin Information")
+}else if (medium == "Facebook")
+{
+  print("Showing Facebook Information")
+}else {
+  print("Unknown medium")
+}
+
+if(num_views > 15){
+  print("You are popular!")
+}else if(num_views <=15 & num_views > 10){
+  print("Your number of views is average")
+}else{
+  print("Try to be more visible")
+}
+
+```
+
+```{r}
+result = ""
+number = 6
+
+if(number < 10){
+  if(number < 5){
+    result = "extra small"
+  }else{
+    result = "small"
+  }
+}else if(number < 100){
+  result = "mediumn"
+}else{
+  result = "large"
+}
+print(result)
+
+```
+
+Write a While Loop
+```{r}
+
+speed <- 64
+while (speed > 30){
+  print("Slow Down!")
+  speed = speed - 7
+}
+speed
+```
+
+
+```{r}
+
+while (speed > 30){
+  print(paste("Your speed is", speed))
+  if(speed >= 48){
+    print("Slow donw big time!")
+    speed<- speed - 11
+  }else{
+    speed <- speed - 6
+  }
+}
+speed
+```
+
+Stop the while loop: break
+```{r}
+speed = 88
+while (speed > 30) {
+  print(paste("Your speed is", speed))
+  if(speed > 80){
+    break
+  }
+  
+  if(speed > 48){
+    print("Slow down big time")
+    speed <- speed - 11
+  }else{
+    print("Slow Down!")
+    speed = speed - 6
+  }
+}
+
+speed
+```
+
+Build a while loop from scratch
+
+```{r}
+i = 1 
+while(i <=10){
+  print(3*i)
+  if((i*3)  %% 8 == 0){
+    break
+  }
+  i = i+1
+}
+
+
+```
+
+
