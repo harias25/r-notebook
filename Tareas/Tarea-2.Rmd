@@ -1,0 +1,243 @@
+---
+title: "Tarea 2"
+output: html_notebook
+name: "Haroldo Pablo Arias Molina"
+id: "999008683"
+---
+
+
+# Funciones en R
+
+### Información General
+- Nombre: Haroldo Pablo Arias Molina
+- Registro: 999008683
+
+
+##  Funciones y Procedimientos
+
+_La definción de funciones es básicamente igual a cualquier lenguajes de programación, R permite definir funciones y procedimientos que realizarán diferentes procesos que tengan definidos, de igual forma podemos implementar funciones y procedimientos que reciban argumentos o bien llamados parametros, para utilizarlos dentro de la lógica de está._
+
+
+### Estructura de una Función y Procedimiento
+
+_La estructura de una función es básicamente la siguiente_
+
+```{r}
+
+#los argumentos son opcionales, y se delimitan por comas si se tuvieran más
+NameFunction = function(argumentos) {
+  # Cuerpo de la función
+  return(valor)
+}
+```
+
+_La estructura de un procedimiento es básicamente el siguiente_
+
+```{r}
+
+#los argumentos son opcionales, y se delimitan por comas si se tuvieran más
+NameProcedure = function(argumentos) {
+  # Cuerpo del procedimiento
+}
+```
+
+### Argumentos de una función
+_Los argumentos de una función son opcionales, pueden existir funciones y procedimientos que no tengan, sin embargo según la lógica que tenga la función así serán requeridos_
+
+_Dentro de los argumentos podemos mandar cualquer tipo de valor, como un número, un texto, un arreglo, matriz, etc. Pero este envío de información no afectará el flujo normal del código, ya que solo se trasmite el valor cuando se envian valores de otras variables._
+
+_¿Qué quiere decir esto de solo el valor?_
+
+_Por ejemplo vamos a tener el siguiente código para explicar esto_
+
+```{r}
+#tenemos la siguiente función que suma una unidad al valor que se ingresa
+
+aumentar = function(valor){
+  valor = valor + 5
+  return(valor)
+}
+
+#por otro lado tenemos la variable numero que tiene un valor inicial de 10
+numero = 10
+
+#vamos a utilizar la función aumentar enviando esta variable número como parametro.
+resultado = aumentar(numero)
+
+#a pesar que estamos mandando como parametro una variable existente, solo se esta enviando el valor 
+# que esta llegue a tener, por lo que siempre deberia de tener como valor el 10 y no haberse sido 
+# afectado su valor al operarse dentro de la función. Ya que el entorno de esta función es distinto
+# al entorno donde esta el valor de numero
+
+
+#por lo que si imprimos los valores vamos a ver que no cambio y solo se uso su valor en la función
+
+print(paste("Valor de numero", numero)) #deberia ser 10
+print(paste("valor del resultado", resultado )) #deberia ser 15
+
+
+```
+
+
+
+### Ejemplo de una Función y Procedimiento
+_Vamos a declarar una función que pueda realizar la suma de 2 números y que esta retorne el valor final de la suma_
+
+```{r}
+
+#Para ello declaramos una función llamada sumar, la cual tendrá como parametros
+#2 números los cuales va a sumar
+
+sumar = function(numero1, numero2) {
+  resultado <- numero1 + numero2
+  return(resultado)
+}
+
+#para utilizarla básicamente se realiza lo siguiente
+
+resultadoSuma = sumar(6,4) # vamos a guardar el valor del resultado en una variable
+cat("El resultado de sumar 6 y 4 es ", resultadoSuma)
+```
+
+_Vamos a declarar un procedimiento que reciba una variable con el nombre y que imprima un saludo_
+
+```{r}
+
+#Para ello declaramos una procedimiento llamada saludo, el cual tendrá como parametro
+#una variable que tendrá el nombre y mostrará un saludo
+
+saludar = function(nombre) {
+  cat("Hola ", nombre, "!")
+}
+
+#para utilizarla básicamente se realiza lo siguiente
+saludar("Haroldo") # vamos a solo llamar el procedimiento y enviarle la información
+```
+
+
+
+##  Funciones Apply
+
+### Función Apply
+_Está función toma un data frame, vector, matriz o lista como argumento y permite aplicar una función a las filas y columnas_
+
+_La estructura es la siguiente:_
+
+```{r}
+apply(estructura, orden, funcion)
+
+#En donde
+#Estrucutura -> Lista, Matriz, Vector, etc
+#Orden puede ser 1 para operar filas y 2 para columnas
+#funcion -> Nombre la función a utilizar
+```
+
+
+#### Ejemplo
+
+```{r}
+#Se declara la variable con un data frame
+estructura <- data.frame(x1 = 1:5,           
+                      x2 = 2:6,
+                      x3 = 3:7)
+estructura
+```
+
+```{r}
+# por lo que vamos a utilizar la función sum para que sume los valores segun el orden que se indique
+#filas
+resultadoRows = apply(estructura, 1, sum)
+cat("Por Filas -> ", resultadoRows)
+print("")
+#columnas
+resultadoCols = apply(estructura, 2, sum)
+cat("Por Columnas -> ", resultadoCols)
+```
+
+
+### Función Lapply
+_Está función recibe únicamente como parametro una lista y retorna una lista _
+
+_La estructura es la siguiente:_
+
+```{r}
+lapply(estructura, funcion)
+
+#En donde
+#Estrucutura -> Lista
+#funcion -> Nombre la función a utilizar
+```
+
+
+#### Ejemplo
+
+```{r}
+#Se declara la variable con un data frame
+lista <- c("pedro", "juan", "carlos")
+lista
+```
+
+```{r}
+# por lo que vamos a utilizar la función toUpper para convertir en mayusculas los textos de la lista
+resultadoLapply = lapply(lista,toupper)
+print("Lapply Resultado -> ") 
+resultadoLapply
+```
+
+### Función Sapply
+_Está función recibe únicamente como parametro una lista, vector o data frame y retorna un vector_
+
+_La estructura es la siguiente:_
+
+```{r}
+sapply(estructura, funcion)
+
+#En donde
+#Estrucutura -> lista, vector o data frame
+#funcion -> Nombre la función a utilizar
+```
+
+
+#### Ejemplo
+
+```{r}
+#Se declara la variable con un data frame
+dNumeros<- data.frame( x=c(1,2,3,4,5,6),
+                          y=c(7,8,9,10,11,12))
+dNumeros
+```
+
+```{r}
+# por lo que vamos a utilizar la función max para retornar los valores maximos de las columnas en
+resultadoSapply = sapply(dNumeros,max)
+print("Sapply Resultado -> ") 
+resultadoSapply
+```
+
+### Función Vapply
+_Está función es muy similar a la Función Sapply, que únicamente como parametro una lista, vector o data frame y retorna un vector, la diferencia que acá se debe definir el tipo de valor de salida que devolvera en el arreglo_
+
+_La estructura es la siguiente:_
+
+```{r}
+vapply(estructura, funcion, tipo)
+
+#En donde
+#Estrucutura -> lista, vector o data frame
+#funcion -> Nombre la función a utilizar
+#tipo -> tipo de valor resultante del vector
+```
+
+#### Ejemplo
+
+_Utilizando la misma variable del sapply_
+
+```{r}
+resultadoVapply = vapply(dNumeros,length, integer(1))
+print("Vapply Resultado -> ") 
+resultadoVapply
+```
+
+
+
+
