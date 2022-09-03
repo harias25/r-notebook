@@ -1,0 +1,71 @@
+---
+title: "Tarea 4"
+output: html_notebook
+name: "Haroldo Pablo Arias Molina"
+id: "999008683"
+---
+
+##  Importación de Libreria
+```{r}
+library(tidyverse)
+```
+
+##  Carga de Archivo Diamonds
+```{r}
+diamonds <- read_csv("./diamonds.csv",show_col_types = FALSE)
+print(diamonds)
+```
+
+##  1. Gráfica de Dispersión
+```{r}
+ggplot(diamonds,
+       aes(x=carat,
+           y=price,
+           color=clarity)
+          ) + geom_point()
+```
+
+
+##  2. Gráfico de Histograma
+```{r}
+ggplot(diamonds, aes(x=price)) + geom_histogram(bins=40)
+ggplot(diamonds, aes(x=price)) + geom_histogram(bins=40) + scale_x_log10()
+```
+
+##  3. Gráfico de Boxplots
+```{r}
+ggplot(diamonds,
+       aes(x=cut, 
+           y=price)
+       ) + geom_boxplot() + scale_y_log10()
+
+
+ggplot(diamonds,
+       aes(x=cut,
+           y=price,
+           fill=cut)) + geom_boxplot() + scale_y_log10()
+```
+##  4. Gráfico de Faceting
+
+```{r}
+filtered_price <- diamonds %>% filter(price > 1000) %>% filter(cut %in% c("Good","Ideal","Premium"))
+ggplot(filtered_price, aes(x=cut,y=depth, faceting=clarity, fill=clarity))+geom_bar(stat='identity')
+```
+
+##  5. Grouping and summarizing
+
+### 5.1 
+```{r}
+median_dimension_diamond <- diamonds %>% group_by(cut) %>% summarise(mediaX = mean(x),mediaY = mean(y),mediaZ = mean(z))
+print(median_dimension_diamond)
+```
+### 5.2 
+```{r}
+cut_premium <- diamonds %>% filter(cut=="Premium") %>% group_by(clarity) %>% summarise(minPrice=min(price), maxPrice=max(price))
+print(cut_premium)
+```
+
+### 5.3 
+```{r}
+ggplot(cut_premium, aes(x=clarity,y=maxPrice, fill=clarity))+geom_bar(stat='identity')
+```
